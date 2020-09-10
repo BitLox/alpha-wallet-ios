@@ -31,7 +31,7 @@ class TokenInstanceActionViewController: UIViewController, TokenVerifiableStatus
         return webView
     }()
 
-    
+
     //TODO might have to change the number of buttons? if the action type change or should we just go back since the flow may be broken if we remain in this screen
     private let buttonsBar = ButtonsBar(configuration: .green(buttons: 1))
     private var isFungible: Bool {
@@ -142,10 +142,11 @@ class TokenInstanceActionViewController: UIViewController, TokenVerifiableStatus
         tokenScriptRendererView.loadHtml(html, hash: hash)
 
         //TODO this will only contain values that has been resolved and might not refresh properly when the values are 1st resolved or updated
+        //TODO rename this. Not actually `existingAttributeValues`, but token attributes
         let existingAttributeValues = tokenHolder.values
-        let actionLevelAttributeValues = action.attributes.resolve(withTokenIdOrEvent: tokenHolder.tokens[0].tokenIdOrEvent, userEntryValues: .init(), server: server, account: session.account, additionalValues: existingAttributeValues, localRefs: tokenScriptRendererView.localRefs)
+        let cardLevelAttributeValues = action.attributes.resolve(withTokenIdOrEvent: tokenHolder.tokens[0].tokenIdOrEvent, userEntryValues: .init(), server: server, account: session.account, additionalValues: existingAttributeValues, localRefs: tokenScriptRendererView.localRefs)
 
-        tokenScriptRendererView.update(withTokenHolder: tokenHolder, actionLevelAttributeValues: actionLevelAttributeValues, isFungible: isFungible)
+        tokenScriptRendererView.update(withTokenHolder: tokenHolder, cardLevelAttributeValues: cardLevelAttributeValues, isFungible: isFungible)
     }
 
     @objc func proceed() {
@@ -162,7 +163,7 @@ class TokenInstanceActionViewController: UIViewController, TokenVerifiableStatus
         let fetchUserEntries = userEntryIds
                 .map { "document.getElementById(\"\($0)\").value" }
                 .compactMap { tokenScriptRendererView.inject(javaScript: $0) }
-        let xmlHandler = XMLHandler(contract: contract, assetDefinitionStore: assetDefinitionStore)
+        let xmlHandler = XMLHandler(token: tokenObject, assetDefinitionStore: assetDefinitionStore)
         let tokenLevelAttributeValues = xmlHandler.resolveAttributesBypassingCache(withTokenIdOrEvent: tokenHolder.tokens[0].tokenIdOrEvent, server: server, account: session.account)
         let resolveTokenLevelSubscribableAttributes = Array(tokenLevelAttributeValues.values).filterToSubscribables.createPromiseForSubscribeOnce()
 

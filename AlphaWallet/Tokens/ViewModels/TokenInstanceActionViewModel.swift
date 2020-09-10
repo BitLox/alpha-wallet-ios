@@ -8,7 +8,7 @@ struct TokenInstanceActionViewModel {
     let assetDefinitionStore: AssetDefinitionStore
 
     var actions: [TokenInstanceAction] {
-        let xmlHandler = XMLHandler(contract: tokenHolder.contractAddress, assetDefinitionStore: assetDefinitionStore)
+        let xmlHandler = XMLHandler(contract: tokenHolder.contractAddress, tokenType: tokenHolder.tokenType, assetDefinitionStore: assetDefinitionStore)
         return xmlHandler.actions
     }
 }

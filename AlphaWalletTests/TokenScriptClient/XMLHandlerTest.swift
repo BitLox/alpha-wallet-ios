@@ -902,7 +902,7 @@ class XMLHandlerTest: XCTestCase {
         """
         let contractAddress = AlphaWallet.Address(string: "0xA66A3F08068174e8F005112A8b2c7A507a822335")!
         let store = AssetDefinitionStore(backingStore: AssetDefinitionInMemoryBackingStore())
-        store[contractAddress] = xml
+        store[contractAddress] = (xml: xml, isBase: false)
         let xmlHandler = XMLHandler(contract: contractAddress, assetDefinitionStore: store)
         let tokenId = BigUInt("0000000000000000000000000000000002000000000000000000000000000000", radix: 16)!
         let server: RPCServer = .main

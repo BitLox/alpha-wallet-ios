@@ -127,6 +127,7 @@
 "transactions.received.ether" = "Has recibido %@ %@";
 "transactions.received.ether.notification.prompt" = "¿Permitir notificaciones al recibir %@?";
 "transaction.navigation.title" = "Transacción";
+"activity.tabbar.item.title" = "Activity";
 "import.navigation.title" = "Importar monedero";
 "configureTransaction.data.label.title" = "Datos de la transacción (opcional)";
 "configureTransaction.nonce.label.title" = "Nonce (opcional)";
@@ -461,3 +462,8 @@
 "a.wallet.token.transaction.inProgress.subtitle" = "The transaction is sent to the Ethereum\nblockchain. It might take few minutes\nto be confirmed by miners.";
 "a.wallet.token.transaction.inProgress.confirm" = "OK, great!";
 "a.wallet.token.erc20ExchangeOnUniswap.button.title" = "Exchange with Uniswap";
+"activity.from" = "from %@";
+"activity.to" = "to %@";
+"activity.approvalObtained" = "Gave approval to move %@";
+"activity.ownerApproved" = "Approved to move %@";
+"activity.goToToken" = "Go to Token";
